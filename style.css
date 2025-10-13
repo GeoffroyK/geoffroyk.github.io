@@ -8,6 +8,7 @@ body {
     padding: 0;
     color: #333;
     background-color: #9CAF88; /* Sage green background */
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 header {
@@ -20,6 +21,7 @@ header {
     align-items: center;
     gap: 2.5rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex-wrap: nowrap; /* Keep horizontal layout */
 }
 
 .profile-image {
@@ -34,6 +36,8 @@ header {
 
 .header-text {
     flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
 }
 
 .header-text h1 {
@@ -53,26 +57,34 @@ header {
 }
 
 nav {
-    background-color: #E8EDE4; /* Light sage green for nav */
+    background-color: #E8EDE4;
     padding: 1rem;
     text-align: center;
     font-family: 'Lato', sans-serif;
     font-weight: 400;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap; /* allows wrapping on small screens */
 }
 
 nav a {
-    color: #4A5D3F; /* Darker sage green for nav links */
+    color: #4A5D3F;
     text-decoration: none;
-    margin: 0 1.5rem;
     font-size: 1.1rem;
     font-weight: 500;
     transition: all 0.3s ease;
-    padding: 0.5rem 0;
+    padding: 0.5rem 1rem;
     border-bottom: 2px solid transparent;
 }
 
 nav a:hover {
-    color: #2C3824; /* Even darker sage green for hover */
+    color: #2C3824;
     border-bottom: 2px solid #4A5D3F;
 }
 
@@ -80,6 +92,7 @@ nav a:hover {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+    padding-bottom: 6rem; /* Add space for fixed footer */
 }
 
 .section {
@@ -131,6 +144,7 @@ footer {
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
 .social-links {
@@ -155,6 +169,38 @@ footer {
 }
 
 /* Responsive Design */
+
+/* Large tablets and small desktops */
+@media screen and (max-width: 1024px) {
+    .container {
+        padding: 1.5rem;
+    }
+    
+    header {
+        padding: 2rem;
+        gap: 2rem;
+    }
+    
+    .profile-image {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .header-text h1 {
+        font-size: 2rem;
+    }
+    
+    .institution-logos {
+        gap: 0.5rem;
+    }
+    
+    .logo-1, .logo-2, .logo-3 {
+        width: 80px;
+        height: 40px;
+    }
+}
+
+/* Tablets */
 @media screen and (max-width: 768px) {
     nav {
         padding: 0.5rem;
@@ -163,6 +209,8 @@ footer {
     nav a {
         display: block;
         margin: 0.5rem 0;
+        padding: 0.8rem 0;
+        font-size: 1rem;
     }
     
     .container {
@@ -170,7 +218,165 @@ footer {
     }
     
     header {
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+    
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .header-text h1 {
+        font-size: 1.8rem;
+    }
+    
+    .header-text p {
+        font-size: 1rem;
+    }
+    
+    .institution-logos {
+        gap: 0.8rem;
+    }
+    
+    .logo-1, .logo-2, .logo-3 {
+        width: 70px;
+        height: 35px;
+    }
+    
+    .section {
+        padding: 0.8rem;
+    }
+    
+    .section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .section p {
+        font-size: 1rem;
+    }
+    
+    ul li {
+        font-size: 1rem;
+    }
+}
+
+/* Mobile phones */
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    
+    header {
         padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .header-text h1 {
+        font-size: 1.5rem;
+    }
+    
+    .header-text p {
+        font-size: 0.9rem;
+    }
+    
+    .container {
+        padding: 0.8rem;
+    }
+    
+    .section {
+        padding: 0.6rem;
+        margin-bottom: 1rem;
+    }
+    
+    .section h2 {
+        font-size: 1.3rem;
+    }
+    
+    .section p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    ul li {
+        font-size: 0.9rem;
+        margin-bottom: 0.6rem;
+        padding-left: 1rem;
+    }
+    
+    nav a {
+        padding: 0.6rem 0;
+        font-size: 0.9rem;
+    }
+    
+    .institution-logos {
+        margin-left: 0;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .logo-1, .logo-2, .logo-3 {
+        width: 60px;
+        height: 30px;
+    }
+    
+    footer {
+        padding: 0.8rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .footer-text {
+        font-size: 0.8rem;
+        margin: 0;
+    }
+    
+    .social-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Very small screens */
+@media screen and (max-width: 320px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
+    header {
+        padding: 0.8rem;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .profile-image {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .header-text h1 {
+        font-size: 1.3rem;
+    }
+    
+    .header-text p {
+        font-size: 0.8rem;
+    }
+    
+    .institution-logos {
+        margin-left: 0;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .logo-1, .logo-2, .logo-3 {
+        width: 50px;
+        height: 25px;
     }
 }
 
@@ -180,6 +386,7 @@ footer {
     gap: 1rem;
     margin-left: auto;
     z-index: 2 !important;
+    flex-shrink: 0;
 }
 
 /* Base logo style */
